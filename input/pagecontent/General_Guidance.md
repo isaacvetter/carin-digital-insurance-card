@@ -76,7 +76,7 @@ The Digital Insurance Card can be shared by a consumer in flexible ways. See [Au
 
 - §c4dic-016 **SHALL** follow the [SMART Health Links specification]({{site.data.fhir.ver.shcl}}) to create a SMART Health Link referencing the SMART Health Card. §
   - §c4dic-017 **SHALL** include the SMART Health Card as `application/smart-health-card`, a JSON file with a `.verifiableCredential array` containing the SMART Health Card JWS string, as specified by [{{site.data.fhir.ver.shcl}}/cards-specification.html#via-file-download]({{site.data.fhir.ver.shcl}}/cards-specification.html#via-file-download). §
-  - §c4dic-018 **SHALL NOT** require the user to set a passcode, and SHALL NOT enforce a passcode by default. §
+  - §c4dic-018 **SHALL NOT** require, after initial download/retrieval, the user to set a passcode on a generated SMART Health Link, and **SHALL NOT** populate the `P` flag in the generated SMART Health Link Payload by default. §
 
 - §c4dic-019 **SHALL** share the Digital Insurance Card with the member as other personal information would be shared. §
  - §c4dic-020 **SHALL** provide the member the SMART Health Link in text URI format as well as QR format, as described here [{{site.data.fhir.ver.shcl}}/cards-specification.html#presenting-health-cards-to-a-verifier]({{site.data.fhir.ver.shcl}}/cards-specification.html#presenting-health-cards-to-a-verifier). §
