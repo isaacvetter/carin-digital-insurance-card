@@ -19,6 +19,7 @@ Authors and Contributors can include people who may no longer be with the organi
 
 * Secondary
     * Adam Culbertson (Humana) – [Aculbertson1@humana.com](mailto:Aculbertson1@humana.com)
+    * Alex Dzeda (Element) - [alexdzeda@gmail.com](mailto:alexdzeda@gmail.com)
     * Anthony Gatti (Humana) [agatti@humana.com](mailto:agatti@humana.com)
     * Ryan Howells (Leavitt Partners, LLC) - [ryan.howells@leavittpartners.com](mailto:ryan.howells@leavittpartners.com)
     * Cille Kissel Watkins (Humana) – [Ckissel@humana.com](mailto:Ckissel@humana.com)

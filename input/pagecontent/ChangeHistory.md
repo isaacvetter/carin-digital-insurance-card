@@ -4,6 +4,9 @@
 
 | JIRA Ticket                                          | Change                                                                           |
 |------------------------------------------------------|----------------------------------------------------------------------------------|
+| **Block-Vote-2**                                      |                        |
+| [FHIR-56987](https://jira.hl7.org/browse/FHIR-56987) | Update c4dic-018 passcode language: clarify SHALL NOT requirement applies after initial download/retrieval, and add SHALL NOT populate the `P` flag in the SMART Health Link Payload by default |
+| [FHIR-56986](https://jira.hl7.org/browse/FHIR-56986) | Add Alex Dzeda (Element) as a Secondary Author |
 | **Block-Vote-1**                                      |                        |
 | [FHIR-56139](https://jira.hl7.org/browse/FHIR-56139) | Add support for front and back of card images in SupportingImage-Extension |
 | [FHIR-55562](https://jira.hl7.org/browse/FHIR-55562) | Add experimental Summary of Benefit Profile |
