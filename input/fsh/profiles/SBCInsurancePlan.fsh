@@ -151,6 +151,10 @@ Description: "Profile of InsurancePlan resource for representing Summary of Bene
 * plan.specificCost.benefit.cost.extension[appliesToNetwork] ^short = "Network whose providers qualify for this cost tier"
 * plan.specificCost.benefit.cost.extension[appliesToNetwork] ^definition = "Identifies which of the plan's networks contains the providers that qualify for this designation-tier cost"
 
+* plan.specificCost.benefit.cost.extension contains DeductibleApplies named deductibleApplies 0..1 MS
+* plan.specificCost.benefit.cost.extension[deductibleApplies] ^short = "Whether this cost accrues to the deductible"
+* plan.specificCost.benefit.cost.extension[deductibleApplies] ^definition = "States whether this cost-sharing amount counts toward the plan deductible, as displayed in the SBC"
+
 * plan.specificCost.benefit.cost.value 1..1 MS
 * plan.specificCost.benefit.cost.value ^short = "Cost amount"
 * plan.specificCost.benefit.cost.value ^definition = "The actual cost-sharing amount (dollar amount for copay, percentage for coinsurance)"

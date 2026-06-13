@@ -35,6 +35,7 @@ The example includes six representative benefit categories demonstrating differe
 - **In-Network:** $25 copay
 - **Out-of-Network:** Not covered
 - **Requirement:** No referral required
+- **Deductible:** Does not apply (DeductibleApplies extension, `false`)
 
 #### 3. Specialist Visit
 - **In-Network (Value Choice Provider):** $0 copay, for providers in the plan's Value Choice network
@@ -60,6 +61,7 @@ This benefit demonstrates multi-tier cost sharing: several in-network cost entri
 - **Out-of-Network:** Not covered
 - **Requirement:** Prior authorization required for non-emergency admissions
 - **Limitation:** Prior authorization required
+- **Deductible:** Applies (DeductibleApplies extension, `true`)
 
 ### Excluded Services
 
@@ -240,6 +242,24 @@ When a plan offers different cost sharing for the same benefit and network statu
       "value": { "value": 10, "unit": "USD" }
     }
   ]
+}
+```
+
+### Pattern 8: Deductible Applicability
+
+The DeductibleApplies extension states whether a cost-sharing amount accrues to the plan deductible, the SBC "deductible applies?" information:
+
+```json
+{
+  "cost": [{
+    "extension": [{
+      "url": "http://hl7.org/fhir/us/insurance-card/StructureDefinition/deductible-applies",
+      "valueBoolean": true
+    }],
+    "type": { "text": "Coinsurance" },
+    "applicability": { "text": "in-network" },
+    "value": { "value": 20, "unit": "%" }
+  }]
 }
 ```
 

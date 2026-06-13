@@ -102,6 +102,7 @@ Usage: #example
 
 * plan[0].specificCost[1].benefit[0].cost[0].type.text = "Copayment"
 * plan[0].specificCost[1].benefit[0].cost[0].applicability = http://terminology.hl7.org/CodeSystem/applicability#in-network "In Network"
+* plan[0].specificCost[1].benefit[0].cost[0].extension[deductibleApplies].valueBoolean = false
 * plan[0].specificCost[1].benefit[0].cost[0].value.value = 25
 * plan[0].specificCost[1].benefit[0].cost[0].value.unit = "USD"
 
@@ -173,6 +174,7 @@ Usage: #example
 
 * plan[0].specificCost[5].benefit[0].cost[0].type.text = "Coinsurance"
 * plan[0].specificCost[5].benefit[0].cost[0].applicability = http://terminology.hl7.org/CodeSystem/applicability#in-network "In Network"
+* plan[0].specificCost[5].benefit[0].cost[0].extension[deductibleApplies].valueBoolean = true
 * plan[0].specificCost[5].benefit[0].cost[0].value.value = 20
 * plan[0].specificCost[5].benefit[0].cost[0].value.unit = "%"
 

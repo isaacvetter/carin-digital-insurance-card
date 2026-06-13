@@ -89,3 +89,18 @@ Description: "Extension identifying the provider network whose providers qualify
 * value[x] only Reference(Organization)
 * value[x] ^short = "Network whose providers qualify for this cost tier"
 * value[x] ^definition = "Reference to the network Organization whose participating providers qualify for the cost-sharing amount carried by this cost entry"
+
+
+// Deductible Applies Extension
+Extension: DeductibleApplies
+Id: deductible-applies
+Title: "Deductible Applies Extension"
+Description: "Extension indicating whether a cost-sharing amount accrues to the plan deductible, corresponding to the deductible applicability information displayed in the SBC"
+* ^status = #draft
+* ^experimental = true
+* ^context.type = #element
+* ^context.expression = "InsurancePlan.plan.specificCost.benefit.cost"
+
+* value[x] only boolean
+* value[x] ^short = "Whether this cost accrues to the deductible"
+* value[x] ^definition = "True if amounts paid under this cost-sharing entry count toward the plan deductible; false if the cost applies without regard to the deductible"
