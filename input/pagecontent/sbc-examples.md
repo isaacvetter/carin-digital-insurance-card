@@ -37,10 +37,14 @@ The example includes six representative benefit categories demonstrating differe
 - **Requirement:** No referral required
 
 #### 3. Specialist Visit
-- **In-Network:** $50 copay
+- **In-Network (Value Choice Provider):** $0 copay, for providers in the plan's Value Choice network
+- **In-Network (Standard Provider):** $50 copay
+- **In-Network (Virtual Visit):** $10 copay
 - **Out-of-Network:** Not covered
 - **Requirement:** Referral required from primary care physician
 - **Limitation:** Limited to network specialists only; out-of-network not covered except in emergencies
+
+This benefit demonstrates multi-tier cost sharing: several in-network cost entries for the same benefit, distinguished by the `cost.qualifiers` tier (Cost Tier value set) rather than by network applicability. The Value Choice entry uses the CostAppliesToNetwork extension to reference the network Organization whose providers qualify for the $0 tier.
 
 #### 4. Emergency Room Care
 - **In-Network:** $350 copay
@@ -188,6 +192,54 @@ Use the BenefitLimitation extension for requirements and restrictions:
       "valueString": "Prior authorization required"
     }]
   }]
+}
+```
+
+### Pattern 7: Multi-Tier Cost Sharing (Provider Designation or Modality)
+
+When a plan offers different cost sharing for the same benefit and network status, for example a designated "value" provider tier or a virtual visit, each tier is a separate cost entry distinguished by `qualifiers` (Cost Tier value set). The CostAppliesToNetwork extension identifies which of the plan's networks contains the providers that qualify for a designation tier:
+
+```json
+{
+  "cost": [
+    {
+      "extension": [{
+        "url": "http://hl7.org/fhir/us/insurance-card/StructureDefinition/cost-applies-to-network",
+        "valueReference": { "reference": "Organization/ExampleValueChoiceNetwork" }
+      }],
+      "type": { "text": "Copayment" },
+      "applicability": { "text": "in-network" },
+      "qualifiers": [{
+        "coding": [{
+          "system": "http://hl7.org/fhir/us/insurance-card/CodeSystem/cost-tier",
+          "code": "value-choice"
+        }]
+      }],
+      "value": { "value": 0, "unit": "USD" }
+    },
+    {
+      "type": { "text": "Copayment" },
+      "applicability": { "text": "in-network" },
+      "qualifiers": [{
+        "coding": [{
+          "system": "http://hl7.org/fhir/us/insurance-card/CodeSystem/cost-tier",
+          "code": "standard"
+        }]
+      }],
+      "value": { "value": 50, "unit": "USD" }
+    },
+    {
+      "type": { "text": "Copayment" },
+      "applicability": { "text": "in-network" },
+      "qualifiers": [{
+        "coding": [{
+          "system": "http://hl7.org/fhir/us/insurance-card/CodeSystem/cost-tier",
+          "code": "virtual"
+        }]
+      }],
+      "value": { "value": 10, "unit": "USD" }
+    }
+  ]
 }
 ```
 

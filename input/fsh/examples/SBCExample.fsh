@@ -61,6 +61,8 @@ Usage: #example
 
 // Plan Details
 * plan[0].type = SBCPlanTypeCS#HMO
+* plan[0].network[0] = Reference(ExampleValueChoiceNetwork)
+* plan[0].network[0].display = "Sample Health Value Choice Network"
 
 // General Costs - Deductibles and OOP Max
 * plan[0].generalCost[0].type.text = "Individual Deductible"
@@ -108,19 +110,33 @@ Usage: #example
 * plan[0].specificCost[1].benefit[0].cost[1].value.value = 0
 * plan[0].specificCost[1].benefit[0].cost[1].value.unit = "USD"
 
-// Specific Cost - Specialist Visit
+// Specific Cost - Specialist Visit (multi-tier cost sharing by provider designation and modality)
 * plan[0].specificCost[2].category = SBCBenefitCategoryCS#specialist-visit
 * plan[0].specificCost[2].benefit[0].type = SBCBenefitCategoryCS#specialist-visit
 
 * plan[0].specificCost[2].benefit[0].cost[0].type.text = "Copayment"
 * plan[0].specificCost[2].benefit[0].cost[0].applicability = http://terminology.hl7.org/CodeSystem/applicability#in-network "In Network"
-* plan[0].specificCost[2].benefit[0].cost[0].value.value = 50
+* plan[0].specificCost[2].benefit[0].cost[0].qualifiers[0] = CostTierCS#value-choice "Value Choice Provider"
+* plan[0].specificCost[2].benefit[0].cost[0].extension[appliesToNetwork].valueReference = Reference(ExampleValueChoiceNetwork)
+* plan[0].specificCost[2].benefit[0].cost[0].value.value = 0
 * plan[0].specificCost[2].benefit[0].cost[0].value.unit = "USD"
 
-* plan[0].specificCost[2].benefit[0].cost[1].type.text = "Not covered"
-* plan[0].specificCost[2].benefit[0].cost[1].applicability = http://terminology.hl7.org/CodeSystem/applicability#out-of-network "Out of Network"
-* plan[0].specificCost[2].benefit[0].cost[1].value.value = 0
+* plan[0].specificCost[2].benefit[0].cost[1].type.text = "Copayment"
+* plan[0].specificCost[2].benefit[0].cost[1].applicability = http://terminology.hl7.org/CodeSystem/applicability#in-network "In Network"
+* plan[0].specificCost[2].benefit[0].cost[1].qualifiers[0] = CostTierCS#standard "Standard Provider"
+* plan[0].specificCost[2].benefit[0].cost[1].value.value = 50
 * plan[0].specificCost[2].benefit[0].cost[1].value.unit = "USD"
+
+* plan[0].specificCost[2].benefit[0].cost[2].type.text = "Copayment"
+* plan[0].specificCost[2].benefit[0].cost[2].applicability = http://terminology.hl7.org/CodeSystem/applicability#in-network "In Network"
+* plan[0].specificCost[2].benefit[0].cost[2].qualifiers[0] = CostTierCS#virtual "Virtual Visit"
+* plan[0].specificCost[2].benefit[0].cost[2].value.value = 10
+* plan[0].specificCost[2].benefit[0].cost[2].value.unit = "USD"
+
+* plan[0].specificCost[2].benefit[0].cost[3].type.text = "Not covered"
+* plan[0].specificCost[2].benefit[0].cost[3].applicability = http://terminology.hl7.org/CodeSystem/applicability#out-of-network "Out of Network"
+* plan[0].specificCost[2].benefit[0].cost[3].value.value = 0
+* plan[0].specificCost[2].benefit[0].cost[3].value.unit = "USD"
 
 // Specific Cost - Emergency Room Care
 * plan[0].specificCost[3].category = SBCBenefitCategoryCS#emergency-room-care
@@ -179,3 +195,13 @@ Usage: #example
 * telecom[0].value = "1-800-123-4567"
 * telecom[1].system = #url
 * telecom[1].value = "https://www.samplehealth.com"
+
+
+// Supporting Network Organization
+Instance: ExampleValueChoiceNetwork
+InstanceOf: Organization
+Title: "Example Value Choice Provider Network"
+Description: "Example organization representing the plan's Value Choice provider network, referenced by designation-tier cost entries"
+Usage: #example
+
+* name = "Sample Health Value Choice Network"

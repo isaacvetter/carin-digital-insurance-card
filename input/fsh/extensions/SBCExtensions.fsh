@@ -74,3 +74,18 @@ Description: "Extension for documenting limitations and exceptions that apply to
 * value[x] only string
 * value[x] ^short = "Limitation or Exception"
 * value[x] ^definition = "Text describing limitations, exceptions, or additional requirements that apply to this benefit"
+
+
+// Cost Applies To Network Extension
+Extension: CostAppliesToNetwork
+Id: cost-applies-to-network
+Title: "Cost Applies To Network Extension"
+Description: "Extension identifying the provider network whose providers qualify for a designation-tier cost-sharing amount, referencing one of the plan's network Organizations"
+* ^status = #draft
+* ^experimental = true
+* ^context.type = #element
+* ^context.expression = "InsurancePlan.plan.specificCost.benefit.cost"
+
+* value[x] only Reference(Organization)
+* value[x] ^short = "Network whose providers qualify for this cost tier"
+* value[x] ^definition = "Reference to the network Organization whose participating providers qualify for the cost-sharing amount carried by this cost entry"

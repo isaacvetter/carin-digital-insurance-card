@@ -142,6 +142,15 @@ Description: "Profile of InsurancePlan resource for representing Summary of Bene
 * plan.specificCost.benefit.cost.applicability ^short = "Network applicability (in-network, out-of-network)"
 * plan.specificCost.benefit.cost.applicability ^definition = "Whether this cost applies to in-network services, out-of-network services, or other scenarios"
 
+* plan.specificCost.benefit.cost.qualifiers 0..* MS
+* plan.specificCost.benefit.cost.qualifiers from CostTierVS (extensible)
+* plan.specificCost.benefit.cost.qualifiers ^short = "Cost tier (provider designation or modality)"
+* plan.specificCost.benefit.cost.qualifiers ^definition = "Additional qualifying information for this cost, used to carry the provider-designation or modality tier (e.g., value-choice, standard, virtual) that distinguishes multiple cost entries for the same benefit and network applicability"
+
+* plan.specificCost.benefit.cost.extension contains CostAppliesToNetwork named appliesToNetwork 0..1 MS
+* plan.specificCost.benefit.cost.extension[appliesToNetwork] ^short = "Network whose providers qualify for this cost tier"
+* plan.specificCost.benefit.cost.extension[appliesToNetwork] ^definition = "Identifies which of the plan's networks contains the providers that qualify for this designation-tier cost"
+
 * plan.specificCost.benefit.cost.value 1..1 MS
 * plan.specificCost.benefit.cost.value ^short = "Cost amount"
 * plan.specificCost.benefit.cost.value ^definition = "The actual cost-sharing amount (dollar amount for copay, percentage for coinsurance)"
