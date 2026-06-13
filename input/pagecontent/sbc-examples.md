@@ -44,6 +44,7 @@ The example includes six representative benefit categories demonstrating differe
 - **Out-of-Network:** Not covered
 - **Requirement:** Referral required from primary care physician
 - **Limitation:** Limited to network specialists only; out-of-network not covered except in emergencies
+- **Limitation (structured):** Limited to 35 visits per plan year (limitType `visits`, limitValue 35, limitPeriod `plan-year`)
 
 This benefit demonstrates multi-tier cost sharing: several in-network cost entries for the same benefit, distinguished by the `cost.qualifiers` tier (Cost Tier value set) rather than by network applicability. The Value Choice entry uses the CostAppliesToNetwork extension to reference the network Organization whose providers qualify for the $0 tier.
 
@@ -184,18 +185,47 @@ Emergency services must be covered equally regardless of network:
 
 ### Pattern 6: Adding Limitations
 
-Use the BenefitLimitation extension for requirements and restrictions:
+Use the BenefitLimitation extension for requirements and restrictions. The limitation text as displayed in the SBC goes in the `limitText` sub-extension; when the limit is quantifiable, the optional `limitType`, `limitValue`, and `limitPeriod` sub-extensions carry a structured representation:
 
 ```json
 {
   "benefit": [{
     "extension": [{
       "url": "http://hl7.org/fhir/us/insurance-card/StructureDefinition/benefit-limitation",
-      "valueString": "Prior authorization required"
+      "extension": [
+        {
+          "url": "limitText",
+          "valueString": "Limited to 35 visits per plan year"
+        },
+        {
+          "url": "limitType",
+          "valueCodeableConcept": {
+            "coding": [{
+              "system": "http://hl7.org/fhir/us/insurance-card/CodeSystem/limit-type",
+              "code": "visits"
+            }]
+          }
+        },
+        {
+          "url": "limitValue",
+          "valueQuantity": { "value": 35, "unit": "visits" }
+        },
+        {
+          "url": "limitPeriod",
+          "valueCodeableConcept": {
+            "coding": [{
+              "system": "http://hl7.org/fhir/us/insurance-card/CodeSystem/limit-period",
+              "code": "plan-year"
+            }]
+          }
+        }
+      ]
     }]
   }]
 }
 ```
+
+For limitations that are purely narrative (for example, "Prior authorization required"), populate only `limitText`.
 
 ### Pattern 7: Multi-Tier Cost Sharing (Provider Designation or Modality)
 

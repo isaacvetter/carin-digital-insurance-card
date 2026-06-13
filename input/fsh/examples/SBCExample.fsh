@@ -51,10 +51,15 @@ Usage: #example
 
 * coverage[0].benefit[2].type = SBCBenefitCategoryCS#specialist-visit
 * coverage[0].benefit[2].requirement = "Referral required from primary care physician"
-* coverage[0].benefit[2].extension[limitation].valueString = "Limited to network specialists only; out-of-network not covered except in emergencies"
+* coverage[0].benefit[2].extension[limitation][0].extension[limitText].valueString = "Limited to network specialists only; out-of-network not covered except in emergencies"
+* coverage[0].benefit[2].extension[limitation][1].extension[limitText].valueString = "Limited to 35 visits per plan year"
+* coverage[0].benefit[2].extension[limitation][1].extension[limitType].valueCodeableConcept = LimitTypeCS#visits "Visits"
+* coverage[0].benefit[2].extension[limitation][1].extension[limitValue].valueQuantity.value = 35
+* coverage[0].benefit[2].extension[limitation][1].extension[limitValue].valueQuantity.unit = "visits"
+* coverage[0].benefit[2].extension[limitation][1].extension[limitPeriod].valueCodeableConcept = LimitPeriodCS#plan-year "Plan Year"
 
 * coverage[0].benefit[3].type = SBCBenefitCategoryCS#emergency-room-care
-* coverage[0].benefit[3].extension[limitation].valueString = "Copay waived if admitted to hospital"
+* coverage[0].benefit[3].extension[limitation].extension[limitText].valueString = "Copay waived if admitted to hospital"
 
 * coverage[0].benefit[4].type = SBCBenefitCategoryCS#hospital-inpatient
 * coverage[0].benefit[4].requirement = "Prior authorization required for non-emergency admissions"
@@ -152,7 +157,7 @@ Usage: #example
 * plan[0].specificCost[3].benefit[0].cost[1].applicability = http://terminology.hl7.org/CodeSystem/applicability#out-of-network "Out of Network"
 * plan[0].specificCost[3].benefit[0].cost[1].value.value = 350
 * plan[0].specificCost[3].benefit[0].cost[1].value.unit = "USD"
-* plan[0].specificCost[3].benefit[0].extension[limitation].valueString = "Copay waived if admitted"
+* plan[0].specificCost[3].benefit[0].extension[limitation].extension[limitText].valueString = "Copay waived if admitted"
 
 // Specific Cost - Generic Drugs
 * plan[0].specificCost[4].category = SBCBenefitCategoryCS#generic-drugs
@@ -182,7 +187,7 @@ Usage: #example
 * plan[0].specificCost[5].benefit[0].cost[1].applicability = http://terminology.hl7.org/CodeSystem/applicability#out-of-network "Out of Network"
 * plan[0].specificCost[5].benefit[0].cost[1].value.value = 0
 * plan[0].specificCost[5].benefit[0].cost[1].value.unit = "%"
-* plan[0].specificCost[5].benefit[0].extension[limitation].valueString = "Prior authorization required"
+* plan[0].specificCost[5].benefit[0].extension[limitation].extension[limitText].valueString = "Prior authorization required"
 
 
 // Supporting Organization
