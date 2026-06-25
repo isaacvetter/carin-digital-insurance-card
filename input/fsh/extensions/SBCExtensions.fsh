@@ -63,7 +63,7 @@ Description: "Extension for documenting services that are not covered by the hea
 Extension: BenefitLimitation
 Id: benefit-limitation
 Title: "Benefit Limitation Extension"
-Description: "Extension for documenting limitations and exceptions that apply to specific benefits in the SBC"
+Description: "Extension for documenting limitations and exceptions that apply to specific benefits in the SBC, carrying the limitation text as displayed along with an optional structured representation of the limit (type, value, and period)"
 * ^status = #draft
 * ^experimental = true
 * ^context[0].type = #element
@@ -71,6 +71,56 @@ Description: "Extension for documenting limitations and exceptions that apply to
 * ^context[1].type = #element
 * ^context[1].expression = "InsurancePlan.plan.specificCost.benefit"
 
-* value[x] only string
-* value[x] ^short = "Limitation or Exception"
-* value[x] ^definition = "Text describing limitations, exceptions, or additional requirements that apply to this benefit"
+* extension contains
+    limitText 0..1 and
+    limitType 0..1 and
+    limitValue 0..1 and
+    limitPeriod 0..1
+
+* extension[limitText] ^short = "Limitation or Exception"
+* extension[limitText] ^definition = "Text describing limitations, exceptions, or additional requirements that apply to this benefit, as displayed in the SBC"
+* extension[limitText].value[x] only string
+
+* extension[limitType] ^short = "What the limit counts"
+* extension[limitType] ^definition = "The unit of measure for the limit, such as visits, days, or dollars"
+* extension[limitType].value[x] only CodeableConcept
+* extension[limitType].value[x] from LimitTypeVS (extensible)
+
+* extension[limitValue] ^short = "Limit amount"
+* extension[limitValue] ^definition = "The numeric value of the limit"
+* extension[limitValue].value[x] only Quantity
+
+* extension[limitPeriod] ^short = "Period over which the limit applies"
+* extension[limitPeriod] ^definition = "The period over which the limit accrues, such as plan year, calendar year, benefit period, or lifetime"
+* extension[limitPeriod].value[x] only CodeableConcept
+* extension[limitPeriod].value[x] from LimitPeriodVS (extensible)
+
+
+// Cost Applies To Network Extension
+Extension: CostAppliesToNetwork
+Id: cost-applies-to-network
+Title: "Cost Applies To Network Extension"
+Description: "Extension identifying the provider network whose providers qualify for a designation-tier cost-sharing amount, referencing one of the plan's network Organizations"
+* ^status = #draft
+* ^experimental = true
+* ^context.type = #element
+* ^context.expression = "InsurancePlan.plan.specificCost.benefit.cost"
+
+* value[x] only Reference(Organization)
+* value[x] ^short = "Network whose providers qualify for this cost tier"
+* value[x] ^definition = "Reference to the network Organization whose participating providers qualify for the cost-sharing amount carried by this cost entry"
+
+
+// Deductible Applies Extension
+Extension: DeductibleApplies
+Id: deductible-applies
+Title: "Deductible Applies Extension"
+Description: "Extension indicating whether a cost-sharing amount accrues to the plan deductible, corresponding to the deductible applicability information displayed in the SBC"
+* ^status = #draft
+* ^experimental = true
+* ^context.type = #element
+* ^context.expression = "InsurancePlan.plan.specificCost.benefit.cost"
+
+* value[x] only boolean
+* value[x] ^short = "Whether this cost accrues to the deductible"
+* value[x] ^definition = "True if amounts paid under this cost-sharing entry count toward the plan deductible; false if the cost applies without regard to the deductible"
