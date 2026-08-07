@@ -12,7 +12,7 @@
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 id: hl7.fhir.us.insurance-card
 canonical: http://hl7.org/fhir/us/insurance-card
-version: 2.0.0
+version: 2.0.0-ballot
 name: CARINForDigitalInsuranceCard
 title: CARIN Digital Insurance Card
 status: active
@@ -38,19 +38,20 @@ dependencies:
     uri: http://hl7.org/fhir/uv/smart-health-cards-and-links/ImplementationGuide/hl7.fhir.uv.smart-health-cards-and-links
     id: shcl
   hl7.fhir.uv.ips:
-    version: 2.0.0
+    version: 2.0.1
     uri: http://hl7.org/fhir/uv/ips/ImplementationGuide/hl7.fhir.uv.ips
     id: ips
   # hl7.fhir.us.davinci-drug-formulary: 2.0.0
   hl7.fhir.us.davinci-drug-formulary: 2.1.0
-  hl7.terminology.r4: 6.2.0
-  # Note: 7.0.1 is available but may have breaking changes
+  # Always track the latest published THO for the R4 realm (FMG guidance)
+  hl7.terminology.r4: 7.3.0
   # switching from CI Build to working copy
   # This will introduce issues for extensions owned by PIE since their identifier "claims"
   # is not in the HL7 Workgroup CodeSystem
   # hl7.fhir.uv.extensions: 1.0.0
   # Note: Use R4 version for FHIR 4.0.1 compatibility
-  hl7.fhir.uv.extensions.r4: 5.2.0
+  # Always track the latest published Extensions Pack (FMG guidance)
+  hl7.fhir.uv.extensions.r4: 5.3.0
   # hl7.fhir.uv.extensions: 5.1.0-ballot1
   # hl7.fhir.uv.extensions: 5.1.0-snapshot1
   # Current build has fixed the PIE entry in HL7 workgroup CodeSystem
@@ -62,6 +63,9 @@ parameters:
   apply-publisher: true
   jira-code: carin-dic
   shownav: true
+  # Root for OIDs assigned to resources defined in this IG. Assignments are recorded in
+  # oids.ini, which must be committed. Required by IG Publisher 2.2.x.
+  auto-oid-root: 2.16.840.1.113883.4.642.40.9
   # CodeSystems transitioning to THO - using special-url to allow THO URLs while still defined in this IG
   special-url:
     - http://terminology.hl7.org/CodeSystem/C4DICIdentifierType
@@ -69,7 +73,7 @@ parameters:
     - http://terminology.hl7.org/CodeSystem/C4DICExtendedCopayTypeCS
     - http://terminology.hl7.org/CodeSystem/C4DICExtendedContactTypeCS
 copyrightYear: 2026+
-releaseLabel: STU 2.0
+releaseLabel: STU 2 Ballot
 jurisdiction: urn:iso:std:iso:3166#US
 
 extension:
