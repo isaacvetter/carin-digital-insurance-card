@@ -16,6 +16,10 @@
 # SBC CodeSystems are experimental and will be evaluated for THO migration when they mature.
 %Most code systems defined in HL7 IGs will need to move to THO later during the process%
 
+# The SBC module is experimental in this release, and its CodeSystems are marked
+# experimental/draft accordingly. The SBC examples necessarily reference them.
+%Reference to experimental CodeSystem http://hl7.org/fhir/us/insurance-card/CodeSystem/%
+
 # Duplicate anchor IDs in extension HTML is a known IG Publisher rendering issue
 %The html source has duplicate anchor Ids%
 
