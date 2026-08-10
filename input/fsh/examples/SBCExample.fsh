@@ -51,16 +51,23 @@ Usage: #example
 
 * coverage[0].benefit[2].type = SBCBenefitCategoryCS#specialist-visit
 * coverage[0].benefit[2].requirement = "Referral required from primary care physician"
-* coverage[0].benefit[2].extension[limitation].valueString = "Limited to network specialists only; out-of-network not covered except in emergencies"
+* coverage[0].benefit[2].extension[limitation][0].extension[limitText].valueString = "Limited to network specialists only; out-of-network not covered except in emergencies"
+* coverage[0].benefit[2].extension[limitation][1].extension[limitText].valueString = "Limited to 35 visits per plan year"
+* coverage[0].benefit[2].extension[limitation][1].extension[limitType].valueCodeableConcept = LimitTypeCS#visits "Visits"
+* coverage[0].benefit[2].extension[limitation][1].extension[limitValue].valueQuantity.value = 35
+* coverage[0].benefit[2].extension[limitation][1].extension[limitValue].valueQuantity.unit = "visits"
+* coverage[0].benefit[2].extension[limitation][1].extension[limitPeriod].valueCodeableConcept = LimitPeriodCS#plan-year "Plan Year"
 
 * coverage[0].benefit[3].type = SBCBenefitCategoryCS#emergency-room-care
-* coverage[0].benefit[3].extension[limitation].valueString = "Copay waived if admitted to hospital"
+* coverage[0].benefit[3].extension[limitation].extension[limitText].valueString = "Copay waived if admitted to hospital"
 
 * coverage[0].benefit[4].type = SBCBenefitCategoryCS#hospital-inpatient
 * coverage[0].benefit[4].requirement = "Prior authorization required for non-emergency admissions"
 
 // Plan Details
 * plan[0].type = SBCPlanTypeCS#HMO
+* plan[0].network[0] = Reference(ExampleValueChoiceNetwork)
+* plan[0].network[0].display = "Sample Health Value Choice Network"
 
 // General Costs - Deductibles and OOP Max
 * plan[0].generalCost[0].type.text = "Individual Deductible"
@@ -100,6 +107,7 @@ Usage: #example
 
 * plan[0].specificCost[1].benefit[0].cost[0].type.text = "Copayment"
 * plan[0].specificCost[1].benefit[0].cost[0].applicability = http://terminology.hl7.org/CodeSystem/applicability#in-network "In Network"
+* plan[0].specificCost[1].benefit[0].cost[0].extension[deductibleApplies].valueBoolean = false
 * plan[0].specificCost[1].benefit[0].cost[0].value.value = 25
 * plan[0].specificCost[1].benefit[0].cost[0].value.unit = "USD"
 
@@ -108,19 +116,33 @@ Usage: #example
 * plan[0].specificCost[1].benefit[0].cost[1].value.value = 0
 * plan[0].specificCost[1].benefit[0].cost[1].value.unit = "USD"
 
-// Specific Cost - Specialist Visit
+// Specific Cost - Specialist Visit (multi-tier cost sharing by provider designation and modality)
 * plan[0].specificCost[2].category = SBCBenefitCategoryCS#specialist-visit
 * plan[0].specificCost[2].benefit[0].type = SBCBenefitCategoryCS#specialist-visit
 
 * plan[0].specificCost[2].benefit[0].cost[0].type.text = "Copayment"
 * plan[0].specificCost[2].benefit[0].cost[0].applicability = http://terminology.hl7.org/CodeSystem/applicability#in-network "In Network"
-* plan[0].specificCost[2].benefit[0].cost[0].value.value = 50
+* plan[0].specificCost[2].benefit[0].cost[0].qualifiers[0] = CostTierCS#value-choice "Value Choice Provider"
+* plan[0].specificCost[2].benefit[0].cost[0].extension[appliesToNetwork].valueReference = Reference(ExampleValueChoiceNetwork)
+* plan[0].specificCost[2].benefit[0].cost[0].value.value = 0
 * plan[0].specificCost[2].benefit[0].cost[0].value.unit = "USD"
 
-* plan[0].specificCost[2].benefit[0].cost[1].type.text = "Not covered"
-* plan[0].specificCost[2].benefit[0].cost[1].applicability = http://terminology.hl7.org/CodeSystem/applicability#out-of-network "Out of Network"
-* plan[0].specificCost[2].benefit[0].cost[1].value.value = 0
+* plan[0].specificCost[2].benefit[0].cost[1].type.text = "Copayment"
+* plan[0].specificCost[2].benefit[0].cost[1].applicability = http://terminology.hl7.org/CodeSystem/applicability#in-network "In Network"
+* plan[0].specificCost[2].benefit[0].cost[1].qualifiers[0] = CostTierCS#standard "Standard Provider"
+* plan[0].specificCost[2].benefit[0].cost[1].value.value = 50
 * plan[0].specificCost[2].benefit[0].cost[1].value.unit = "USD"
+
+* plan[0].specificCost[2].benefit[0].cost[2].type.text = "Copayment"
+* plan[0].specificCost[2].benefit[0].cost[2].applicability = http://terminology.hl7.org/CodeSystem/applicability#in-network "In Network"
+* plan[0].specificCost[2].benefit[0].cost[2].qualifiers[0] = CostTierCS#virtual "Virtual Visit"
+* plan[0].specificCost[2].benefit[0].cost[2].value.value = 10
+* plan[0].specificCost[2].benefit[0].cost[2].value.unit = "USD"
+
+* plan[0].specificCost[2].benefit[0].cost[3].type.text = "Not covered"
+* plan[0].specificCost[2].benefit[0].cost[3].applicability = http://terminology.hl7.org/CodeSystem/applicability#out-of-network "Out of Network"
+* plan[0].specificCost[2].benefit[0].cost[3].value.value = 0
+* plan[0].specificCost[2].benefit[0].cost[3].value.unit = "USD"
 
 // Specific Cost - Emergency Room Care
 * plan[0].specificCost[3].category = SBCBenefitCategoryCS#emergency-room-care
@@ -135,7 +157,7 @@ Usage: #example
 * plan[0].specificCost[3].benefit[0].cost[1].applicability = http://terminology.hl7.org/CodeSystem/applicability#out-of-network "Out of Network"
 * plan[0].specificCost[3].benefit[0].cost[1].value.value = 350
 * plan[0].specificCost[3].benefit[0].cost[1].value.unit = "USD"
-* plan[0].specificCost[3].benefit[0].extension[limitation].valueString = "Copay waived if admitted"
+* plan[0].specificCost[3].benefit[0].extension[limitation].extension[limitText].valueString = "Copay waived if admitted"
 
 // Specific Cost - Generic Drugs
 * plan[0].specificCost[4].category = SBCBenefitCategoryCS#generic-drugs
@@ -157,6 +179,7 @@ Usage: #example
 
 * plan[0].specificCost[5].benefit[0].cost[0].type.text = "Coinsurance"
 * plan[0].specificCost[5].benefit[0].cost[0].applicability = http://terminology.hl7.org/CodeSystem/applicability#in-network "In Network"
+* plan[0].specificCost[5].benefit[0].cost[0].extension[deductibleApplies].valueBoolean = true
 * plan[0].specificCost[5].benefit[0].cost[0].value.value = 20
 * plan[0].specificCost[5].benefit[0].cost[0].value.unit = "%"
 
@@ -164,7 +187,7 @@ Usage: #example
 * plan[0].specificCost[5].benefit[0].cost[1].applicability = http://terminology.hl7.org/CodeSystem/applicability#out-of-network "Out of Network"
 * plan[0].specificCost[5].benefit[0].cost[1].value.value = 0
 * plan[0].specificCost[5].benefit[0].cost[1].value.unit = "%"
-* plan[0].specificCost[5].benefit[0].extension[limitation].valueString = "Prior authorization required"
+* plan[0].specificCost[5].benefit[0].extension[limitation].extension[limitText].valueString = "Prior authorization required"
 
 
 // Supporting Organization
@@ -179,3 +202,13 @@ Usage: #example
 * telecom[0].value = "1-800-123-4567"
 * telecom[1].system = #url
 * telecom[1].value = "https://www.samplehealth.com"
+
+
+// Supporting Network Organization
+Instance: ExampleValueChoiceNetwork
+InstanceOf: Organization
+Title: "Example Value Choice Provider Network"
+Description: "Example organization representing the plan's Value Choice provider network, referenced by designation-tier cost entries"
+Usage: #example
+
+* name = "Sample Health Value Choice Network"
