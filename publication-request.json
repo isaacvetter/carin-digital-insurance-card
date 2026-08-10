@@ -6,5 +6,6 @@
   "status" : "ballot",
   "sequence" : "STU2",
   "desc" : "CARIN Digital Insurance Card",
-  "descmd" : "CARIN Digital Insurance Card"
+  "descmd" : "CARIN Digital Insurance Card",
+  "changes" : "ChangeHistory.html"
 }
