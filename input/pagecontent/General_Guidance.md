@@ -44,6 +44,21 @@ The following actors are part of the CARIN IG for Digital Insurance Card:
 * Be able to process and retain all profile data elements that have a minimum cardinality >= 1 and/or flagged as Must Support as defined by that profiles StructureDefinition.
 * Conform to the US Core Client Capability Statement expectations for that profiles type.
 
+<a name="us-core-version-support"></a>
+
+#### US Core Version Support
+
+This IG supports two versions of US Core:
+
+* [US Core 6.1.0 (USCDI v3)]({{site.data.fhir.ver.uscore6}}) - the primary dependency. The profiles in this IG are derived from US Core 6.1.0.
+* [US Core 7.0.0 (USCDI v4)]({{site.data.fhir.ver.uscore7}})
+
+The C4DIC profiles constrain a small number of elements on Coverage, Patient and Organization, and those constraints hold in both releases. Implementers may therefore conform to either version.
+
+To understand the differences between the two releases, see the [Cross Version Comparisons]({{site.data.fhir.ver.uscore6}}/changes-between-versions.html#cross-version-comparisons) section of the US Core IG.
+
+Note: The ONC HTI-1 rule set January 1, 2026 as the date on which US Core 6.1.0 becomes the base standard. Implementers building to USCDI v4 may use US Core 7.0.0.
+
 <a name="common-clinical-data-set"></a>
 
 ### U.S. Core Data for Interoperability and 2015 Edition Common Clinical Data Set

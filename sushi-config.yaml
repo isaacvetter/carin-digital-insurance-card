@@ -24,15 +24,28 @@ description: CARIN Digital Insurance Card
 license: CC0-1.0
 fhirVersion: 4.0.1
 dependencies:
-  # Primary dependency is US Core 6.1.0 (USCDI v3)
-  # This IG also supports US Core 7.0.0 (USCDI v4) - see General Guidance for compatibility notes
+  # Primary dependency is US Core 6.1.0 (USCDI v3). US Core 7.0.0 (USCDI v4) is also
+  # supported - see the US Core Version Support section of General Guidance.
   hl7.fhir.us.core:
     version: 6.1.0
     uri: http://hl7.org/fhir/us/core/ImplementationGuide/hl7.fhir.us.core
     id: uscore6
     reason: |
       Defines USCDI v3 resources that will be used by CARIN Digital Insurance Card.
-      This IG is also compatible with US Core 7.0.0 (USCDI v4).
+      Declared as the plain package so the unversioned US Core canonicals in
+      Aliases.fsh continue to resolve here.
+  hl7.fhir.us.core.v700:
+    version: 7.0.0
+    uri: http://hl7.org/fhir/us/core/v700/ImplementationGuide/hl7.fhir.us.core.v700
+    id: uscore7
+    # hl7.fhir.us.core.v700 is a multi-version-support wrapper package, which is what
+    # lets this IG depend on US Core 7.0.0 alongside 6.1.0. Only one dependency can be
+    # the plain hl7.fhir.us.core. The uri follows the wrapper convention
+    # {package-canonical}/ImplementationGuide/{packageId}. This mirrors Da Vinci PDex
+    # and CRD, and avoids canonical / packageId mismatch warnings on the QA report.
+    reason: |
+      Defines USCDI v4 resources. Implementers may conform to either US Core 6.1.0
+      or US Core 7.0.0; the id makes the version-specific links in the narrative work.
   hl7.fhir.uv.smart-health-cards-and-links:
     version: 1.0.0
     uri: http://hl7.org/fhir/uv/smart-health-cards-and-links/ImplementationGuide/hl7.fhir.uv.smart-health-cards-and-links
