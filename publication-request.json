@@ -1,10 +1,11 @@
 {
   "package-id" : "hl7.fhir.us.insurance-card",
-  "version" : "2.0.0",
-  "path" : "http://hl7.org/fhir/us/insurance-card/STU2",
-  "mode" : "milestone",
-  "status" : "trial-use",
+  "version" : "2.0.0-ballot",
+  "path" : "http://hl7.org/fhir/us/insurance-card/2.0.0-202609-ballot",
+  "mode" : "working",
+  "status" : "ballot",
   "sequence" : "STU2",
   "desc" : "CARIN Digital Insurance Card",
-  "descmd" : "CARIN Digital Insurance Card"
+  "descmd" : "CARIN Digital Insurance Card",
+  "changes" : "ChangeHistory.html"
 }

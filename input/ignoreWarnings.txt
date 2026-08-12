@@ -8,9 +8,6 @@
 # This comes from base FHIR R4 structures and cannot be directly controlled by this IG.
 %The extension http://hl7.org/fhir/StructureDefinition/elementdefinition-maxValueSet%
 
-# References to draft CodeSystems in THO - these are maintained externally and version numbers change
-%Reference to draft CodeSystem http://terminology.hl7.org/CodeSystem/contactentity-type%
-
 # Unresolvable CapabilityStatement Version-Specific Link - This CapabilityStatement has not been published yet.
 %is a canonical link and is therefore unsafe with regard to versions%
 %is a canonical reference, and is unsafe because of version handling (points to the current version, not this version)%
@@ -18,6 +15,10 @@
 # Migration of appropriate CodeSystems to THO is planned for the next release of this IG.
 # SBC CodeSystems are experimental and will be evaluated for THO migration when they mature.
 %Most code systems defined in HL7 IGs will need to move to THO later during the process%
+
+# The SBC module is experimental in this release, and its CodeSystems are marked
+# experimental/draft accordingly. The SBC examples necessarily reference them.
+%Reference to experimental CodeSystem http://hl7.org/fhir/us/insurance-card/CodeSystem/%
 
 # Duplicate anchor IDs in extension HTML is a known IG Publisher rendering issue
 %The html source has duplicate anchor Ids%
@@ -41,15 +42,24 @@
 # Will be addressed when migrating to R5
 %The discriminator type 'pattern' is deprecated in R5+%
 
-# Intentional dependency version choices for FHIR R4 compatibility
-# US Core 6.1.0 (USCDI v3) is the primary target with documented 7.0.0 (USCDI v4) support
-# Upgrading to US Core 8.x would require significant changes and is planned for a future release
-WARNING: ImplementationGuide/hl7.fhir.us.insurance-card: ImplementationGuide.dependsOn[0]: The ImplementationGuide uses package hl7.fhir.us.core#6.1.0 released on 2023-06-30, but the most recent appropriate version is 8.0.1. This reference is getting old and the more recent version should be considered
-
-# hl7.terminology.r4 6.2.0 chosen for stability; 7.0.1 may have breaking changes
-WARNING: ImplementationGuide/hl7.fhir.us.insurance-card: ImplementationGuide.dependsOn[4]: The ImplementationGuide uses package hl7.terminology.r4#6.2.0 released on 2025-01-22, but the most recent appropriate version is 7.1.0. This reference is getting old and the more recent version should be considered
+# Intentional dependency version choice: this IG is deliberately pinned to US Core 6.1.0.
+# US Core 6.1.0 (USCDI v3) is the primary target, with documented compatibility for
+# US Core 7.0.0 (USCDI v4) - see General Guidance. The C4DIC Patient profile intentionally
+# deviates from US Core Patient (an approved deviation for this use case), and the Coverage
+# profile derives from US Core 6.1.0 Coverage. Moving to US Core 8.x changes those base
+# profiles and their must-support sets, so it is scheduled for a future release rather than
+# this ballot. THO and the Extensions Pack DO track the latest published versions.
+%uses package hl7.fhir.us.core#6.1.0%
 
 # Ignore narrative Conformance language flagged in Strucure definitions
 %The html source contains the word 'SHALL' but it is not in a text phrase marked as a conformance clause: 'The C4DIC Server SHALL:%
 %The html source contains the word 'SHALL' but it is not in a text phrase marked as a conformance clause:%
 %The html source contains the word 'SHOULD' but it is not in a text phrase marked as a conformance clause:%
+
+# The Change Notes page quotes JIRA ticket titles verbatim, which can contain 'SHALL NOT'.
+# These are historical change descriptions, not conformance statements.
+%The html source contains the word 'SHALL NOT' but it is not in a text phrase marked as a conformance clause:%
+
+# Version pinning of THO code systems in ValueSet.compose is done automatically by the
+# IG Publisher against the THO version this IG depends on. Informational only.
+%Pinned the version of http://terminology.hl7.org/CodeSystem/%

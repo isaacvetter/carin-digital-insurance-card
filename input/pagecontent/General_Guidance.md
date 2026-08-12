@@ -44,6 +44,23 @@ The following actors are part of the CARIN IG for Digital Insurance Card:
 * Be able to process and retain all profile data elements that have a minimum cardinality >= 1 and/or flagged as Must Support as defined by that profiles StructureDefinition.
 * Conform to the US Core Client Capability Statement expectations for that profiles type.
 
+<a name="us-core-version-support"></a>
+
+#### US Core Version Support
+
+This IG supports two versions of US Core:
+
+* [US Core 6.1.0 (USCDI v3)]({{site.data.fhir.ver.uscore6}}) - the primary dependency. The profiles in this IG are derived from US Core 6.1.0.
+* [US Core 7.0.0 (USCDI v4)]({{site.data.fhir.ver.uscore7}})
+
+This IG profiles only three resources: Coverage, Patient and Organization. US Core 6.1.0 and US Core 7.0.0 place **identical conformance constraints** on all three - the cardinalities, Must Support flags, terminology bindings, types and invariants of [US Core Coverage]({{site.data.fhir.ver.uscore6}}/StructureDefinition-us-core-coverage.html), [US Core Patient]({{site.data.fhir.ver.uscore6}}/StructureDefinition-us-core-patient.html) and [US Core Organization]({{site.data.fhir.ver.uscore6}}/StructureDefinition-us-core-organization.html) are unchanged between the two releases. The only difference is an annotation extension recording which elements are USCDI requirements, which carries no conformance obligation.
+
+A server whose Coverage, Patient and Organization resources conform to either US Core release can therefore satisfy this IG. The C4DIC profiles are derived from US Core 6.1.0, and that derivation is equally valid for an implementer working to US Core 7.0.0.
+
+Note that this equivalence covers only the three resources profiled here. US Core 7.0.0 differs from 6.1.0 in other areas; see the [Cross Version Comparisons]({{site.data.fhir.ver.uscore6}}/changes-between-versions.html#cross-version-comparisons) section of the US Core IG.
+
+Note: The ONC HTI-1 rule set January 1, 2026 as the date on which US Core 6.1.0 becomes the base standard. Implementers building to USCDI v4 may use US Core 7.0.0.
+
 <a name="common-clinical-data-set"></a>
 
 ### U.S. Core Data for Interoperability and 2015 Edition Common Clinical Data Set

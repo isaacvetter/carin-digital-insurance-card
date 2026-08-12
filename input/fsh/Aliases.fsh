@@ -1,8 +1,12 @@
 //USCore -
 
-Alias:   $USCorePatient = http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient
-Alias:   $USCoreOrganization = http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization
-Alias:   $USCoreCoverage = http://hl7.org/fhir/us/core/StructureDefinition/us-core-coverage 
+// Pinned to 6.1.0, the primary US Core dependency. This IG also depends on US Core
+// 7.0.0 (see sushi-config.yaml), and an unversioned canonical would resolve to the
+// higher version, silently re-basing these profiles. The version must stay explicit
+// for as long as more than one US Core is declared.
+Alias:   $USCorePatient = http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient|6.1.0
+Alias:   $USCoreOrganization = http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization|6.1.0
+Alias:   $USCoreCoverage = http://hl7.org/fhir/us/core/StructureDefinition/us-core-coverage|6.1.0
 Alias:   $SubscriberRelationiship = http://hl7.org/fhir/ValueSet/subscriber-relationship
 Alias:   $CoverageClassCS = http://terminology.hl7.org/CodeSystem/coverage-class
 Alias:   $OrganizationIdentifierType   =  http://terminology.hl7.org/CodeSystem/v2-0203

@@ -14,7 +14,7 @@
             ]
         }
     ],
-    "date": "2022-04-20",
+    "date": "2026-08-10",
     "description": "This Section describes the expected capabilities of the C4DIC Server actor which is responsible for providing responses to the queries submitted by the C4DIC Requestors.",
     "experimental": false,
     "fhirVersion": "4.0.1",
@@ -355,6 +355,5 @@
     "status": "active",
     "title": "C4DIC CapabilityStatement",
     "url": "http://hl7.org/fhir/us/insurance-card/CapabilityStatement/c4dic",
-    "version": "1.1.0",
     "resourceType": "CapabilityStatement"
 }
