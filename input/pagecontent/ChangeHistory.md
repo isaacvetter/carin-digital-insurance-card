@@ -75,7 +75,7 @@ Healthcare provider, EHR vendor, or other platform vendor incorporates insurance
 _Add a section for SHL-based implementation:_
 **A Payer, to provide members with SMART Health Digital Insurance Cards:**
 
-§**SHALL** generate a complete and appropriate FHIR bundle using as described in this specification, including Coverage, Organization, and Patient information, as well as any additional information defined by this IG’s extensions. §
+§**SHALL** generate a complete and appropriate FHIR bundle as described in this specification, including Coverage, Organization, and Patient information, as well as any additional information defined by this IG’s extensions. §
 §**SHALL** follow the SMART Health Cards specification to create a SMART Health Card containing the FHIR bundle. §
 §**SHALL** create the SMART Health Card as a JWS string, as defined by https://spec.smarthealth.cards/#health-cards-are-encoded-as-compact-serialization-json-web-signatures-jws. §
 §**SHOULD** implement revocation as defined by https://spec.smarthealth.cards/#revocation. §
